@@ -10,6 +10,11 @@ To run image, run
 ```sh
 docker-compose run --service-ports protonvpn-docker
 ```
+If it complains about iptables, you should do
+```sh
+sudo modprobe ip6table_filter
+```
+(see https://ilhicas.com/2018/04/08/Fixing-do-you-need-insmod.html)
 
 To test, run
 ```sh
