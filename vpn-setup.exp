@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+set timeout -1
+spawn protonvpn init
+# confirmation
+# expect ": "
+# send -- "y\r"
+expect "Enter your ProtonVPN OpenVPN username: "
+send -- "$env(PROTONVPN_USER)\r"
+expect "Enter your ProtonVPN OpenVPN password: "
+send -- "$env(PROTONVPN_PASSWORD)\r"
+expect "Confirm your ProtonVPN OpenVPN password: "
+send -- "$env(PROTONVPN_PASSWORD)\r"
+# plan type
+expect ": "
+send -- "2\r"
+# UDP or TCP
+expect "Your choice: "
+send -- "1\r"
+# confirmation
+expect "Is this information correct? \\\[Y/n\\\]: "
+send -- "y\r"
+expect eof
