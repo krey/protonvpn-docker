@@ -1,4 +1,4 @@
-FROM archlinux
+FROM archlinux:latest
 
 ENV COLUMNS 80
 ENV LINES 24
@@ -8,8 +8,9 @@ ENV PROTONVPN_PASSWORD bar
 
 COPY ./vpn-setup.exp /tmp/vpn-setup.exp
 
-RUN pacman -Sy && \
-    pacman -S --noconfirm which expect openvpn dialog python-pip python-setuptools git dante && \
+RUN pacman -Syu --noconfirm
+
+RUN pacman -S --noconfirm which expect openvpn dialog python-pip python-setuptools git dante && \
     pip install git+https://github.com/krey/protonvpn-cli-ng.git && \
     expect /tmp/vpn-setup.exp && \
     rm /tmp/vpn-setup.exp
