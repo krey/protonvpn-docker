@@ -1,18 +1,17 @@
 FROM archlinux:latest
 
+# install required packages
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm which expect openvpn dialog python-pip python-setuptools git dante && \
+    pip install git+https://github.com/krey/protonvpn-cli-ng.git
+
+COPY ./vpn-setup.exp ./config.sh /tmp/
+
+# protonvpn-cli needs access to width
 ENV COLUMNS 80
-ENV LINES 24
-# get these from https://protonvpn.com/support/vpn-login/
-ENV PROTONVPN_USER foo
-ENV PROTONVPN_PASSWORD bar
 
-COPY ./vpn-setup.exp /tmp/vpn-setup.exp
-
-RUN pacman -Syu --noconfirm
-
-RUN pacman -S --noconfirm which expect openvpn dialog python-pip python-setuptools git dante && \
-    pip install git+https://github.com/krey/protonvpn-cli-ng.git && \
+RUN source /tmp/config.sh && \
     expect /tmp/vpn-setup.exp && \
-    rm /tmp/vpn-setup.exp
+    rm /tmp/vpn-setup.exp /tmp/config.sh
     
-COPY ./sockd.conf /etc/sockd.conf
+COPY ./sockd.conf /etc/
