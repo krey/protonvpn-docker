@@ -3,7 +3,7 @@ FROM archlinux:latest
 # install required packages
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm which expect openvpn dialog python-pip python-setuptools git dante && \
-    pip install git+https://github.com/krey/protonvpn-cli-ng.git
+    pip install protonvpn-cli
 
 COPY ./vpn-setup.exp ./config.sh /tmp/
 
