@@ -13,8 +13,6 @@ services:
             - NET_ADMIN
         devices:
             - "/dev/net/tun:/dev/net/tun"
-        command: >
-            sh -c "protonvpn connect --cc US &&
-            sockd -N $$SOCKD_WORKERS"
-#        volumes:
-#            - "./sockd.conf:/etc/sockd.conf"
+        command: sh /root/startup.sh
+        volumes:
+            - "./startup.sh:/root/startup.sh"
