@@ -1,4 +1,3 @@
-# syntax = docker/dockerfile:experimental
 FROM archlinux:latest
 
 # install required packages
@@ -11,9 +10,4 @@ COPY ./vpn-setup.exp /tmp/
 # protonvpn-cli needs access to width
 ENV COLUMNS 80
 
-RUN --mount=type=secret,id=configs,dst=/tmp/config.sh \
-    source /tmp/config.sh && \
-    expect /tmp/vpn-setup.exp && \
-    rm /tmp/vpn-setup.exp
-    
 COPY ./sockd.conf /etc/

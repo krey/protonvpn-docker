@@ -2,13 +2,12 @@
 Setup script to run `protonvpn` inside a docker container.
 
 # Installation
-To build image, set your credentials in `config.sh` first. (Template: `config.sh.sample`)
+To build image, set your credentials in `.env` first. (Template: `.env.sample`)
 
-Then build the image using Docker BuildKit.
-The easiest way is to set `DOCKER_BUILDKIT=1`, or use `docker buildx build` with docker >= 19.03.
+Then build the image.
 
 ```sh
-DOCKER_BUILDKIT=1 docker image build . --secret id=configs,src=./config.sh -t protonvpn-docker
+docker image build . -t protonvpn-docker
 ```
 
 # Usage
