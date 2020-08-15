@@ -5,6 +5,8 @@ services:
         image: protonvpn-docker
         stdin_open: true
         tty: true
+        env_file:
+            - ".env"
         environment:
             - SOCKD_WORKERS=10
         ports:
