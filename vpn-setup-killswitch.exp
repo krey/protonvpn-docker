@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+set timeout -1
+# Kill Switch
+spawn protonvpn configure
+expect "Please enter your choice or leave empty to quit: "
+send -- "5\r"
+expect "Please enter your choice or leave empty to quit: "
+send -- "$env(PROTONVPN_KILLSWITCH)\r"
+expect eof

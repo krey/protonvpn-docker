@@ -1,0 +1,11 @@
+#!/usr/bin/expect
+set timeout -1
+# DNS Management
+spawn protonvpn configure
+expect "Please enter your choice or leave empty to quit: "
+send -- "4\r"
+expect "Please enter your choice or leave empty to quit: "
+send -- "$env(PROTONVPN_DNS)\r"
+expect "Please enter your custom DNS servers (space separated): "
+send -- "$env(PROTONVPN_DNS_SERVERS)\r"
+expect eof
